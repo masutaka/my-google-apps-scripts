@@ -35,8 +35,6 @@ const formatDate = (date) => {
 };
 
 const notifyIfNeed = () => {
-  console.log("start");
-
   const startTime = getStartTime(new Date());
   const endTime = getEndTime(new Date());
   const infraAsakai = getInfraAsakai(startTime, endTime);

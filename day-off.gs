@@ -4,9 +4,12 @@ const main = () => {
   const now = new Date();
 
   if (isDayOff(now)) {
-    console.log("Today is day off.");
+    console.log("I'm off today.");
     setSlackProfile(now);
     setSlackDnd(now);
+  }
+  else {
+    console.log("I'm going to work today.");
   }
 };
 
