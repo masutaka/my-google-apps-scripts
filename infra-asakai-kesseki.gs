@@ -82,25 +82,3 @@ const setTrigger = () => {
   // https://developers.google.com/apps-script/reference/script/script-app#newtriggerfunctionname
   ScriptApp.newTrigger("notifyIfNeed").timeBased().at(time).create();
 };
-
-// Triggers limitation: 20 / user / script
-// https://developers.google.com/apps-script/guides/services/quotas
-const pruneTriggers = () => {
-  const targetFunction = "notifyIfNeed";
-
-  // See also https://developers.google.com/apps-script/reference/script/script-app#deletetriggertrigger
-  ScriptApp.getProjectTriggers().forEach(trigger => {
-    const id = trigger.getUniqueId();
-    const currentFunction = trigger.getHandlerFunction();
-
-    console.log(`[info] currentFunction: ${currentFunction}, targetFunction: ${targetFunction}`);
-
-    if (currentFunction != targetFunction) {
-      console.log(`[skip] id: ${id}, function: ${currentFunction}`);
-      return;
-    }
-
-    console.log(`[delete] id: ${id}, function: ${currentFunction}`);
-    ScriptApp.deleteTrigger(trigger);
-  });
-};
