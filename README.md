@@ -1,28 +1,14 @@
 # my-google-apps-scripts
 
-## インフラ朝会欠席します
+## Setup
 
-[infra-asakai-kesseki.gs](https://github.com/masutaka/my-google-apps-scripts/blob/master/infra-asakai-kesseki.gs)
-
-Google Calendar インフラ朝会（月~金 10:30-10:45）のステータスが欠席だったら、始まる前に Slack の `#tech-infra` に通知する。
-
-そこまで汎用的には作っていないため、Credential のハードコーディングだけを避け、プロパティストアへの参照にしている。
-
-### setTrigger 関数
-
-* 毎日 9:00-10:00 の間に実行するように「編集」→「現在のプロジェクトのトリガー」から設定した
-* この関数は `notifyIfNeed` 関数を 10:20 に実行するトリガーを仕掛ける
-* 時間ベースのトリガーは 1 時間単位でしか設定できないので、このような 2 段構えにした
-
-### pruneTriggers 関数
-
-* 実行された `notifyIfNeed` のトリガーは、二度と実行されないトリガーとして残ってしまう
-* それだけなら問題はないが、[トリガーは 20 / user / script という制限があり](https://developers.google.com/apps-script/guides/services/quotas)、それを超えると新たなトリガーは作れなくなる
-* 仕方がないので、この関数を毎日実行するトリガーを設定し、掃除をしている
+```
+$ npm i -g @google/clasp
+```
 
 ## 今日が全休だったらSlack statusとDNDを設定する
 
-[day-off.gs](https://github.com/masutaka/my-google-apps-scripts/blob/master/day-off.gs)
+[day-off/main.js](https://github.com/masutaka/my-google-apps-scripts/blob/master/day-off/main.js)
 
 Google Calendar で今日「全休」という予定が入っていたら、Slack で以下の設定をする。
 
@@ -37,3 +23,31 @@ Google Calendar で今日「全休」という予定が入っていたら、Slac
 ### main 関数
 
 * 毎日 8:00-9:00 の間に実行するように「編集」→「現在のプロジェクトのトリガー」から設定した
+
+### Deployment
+
+```
+$ cd day-off
+$ clasp push
+```
+
+## インフラ朝会欠席します
+
+[infra-asakai-kesseki/main.js](https://github.com/masutaka/my-google-apps-scripts/blob/master/infra-asakai-kesseki/main.js)
+
+Google Calendar インフラ朝会（月~金 10:30-10:45）のステータスが欠席だったら、始まる前に Slack の `#tech-infra` に通知する。
+
+そこまで汎用的には作っていないため、Credential のハードコーディングだけを避け、プロパティストアへの参照にしている。
+
+### setTrigger 関数
+
+* 毎日 9:00-10:00 の間に実行するように「編集」→「現在のプロジェクトのトリガー」から設定した
+* この関数は `notifyIfNeed` 関数を 10:20 に実行するトリガーを仕掛ける
+* 時間ベースのトリガーは 1 時間単位でしか設定できないので、このような 2 段構えにした
+
+### Deployment
+
+```
+$ cd infra-asakai-kesseki
+$ clasp push
+```
