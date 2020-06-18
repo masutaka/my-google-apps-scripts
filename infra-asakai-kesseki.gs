@@ -28,6 +28,7 @@ const setTrigger = () => {
   const time = new Date();
   time.setHours(10);
   time.setMinutes(20);
+  time.setSeconds(0);
 
   console.log(`[Info] set trigger at ${time}`);
 
