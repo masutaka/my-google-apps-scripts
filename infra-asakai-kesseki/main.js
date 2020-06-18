@@ -18,7 +18,7 @@ const SLACK_BLOCKS = [
     elements: [
       {
         type: "mrkdwn",
-        text: ":github: <https://github.com/masutaka/my-google-apps-scripts/blob/master/infra-asakai-kesseki.gs|source code>",
+        text: ":github: <https://github.com/masutaka/my-google-apps-scripts/blob/master/infra-asakai-kesseki/main.js|source code>",
       }
     ]
   },
