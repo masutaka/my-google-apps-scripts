@@ -54,22 +54,40 @@ const notifyIfNeed = () => {
   // PropertiesService: https://developers.google.com/apps-script/reference/properties/properties-service
   const slackOauthAccessToken = PropertiesService.getScriptProperties().getProperty("SLACK_OAUTH_ACCESS_TOKEN");
   const slackChannel = "#tech-infra";
-  const slackText = "今日はインフラ朝会欠席します。ｶﾞｼｬｰﾝ ｶﾞｼｬｰﾝ :robot_face:";
 
   // UrlFetchApp: https://developers.google.com/apps-script/reference/url-fetch/url-fetch-app
   // Slack chat.postMessage: https://api.slack.com/methods/chat.postMessage
-  UrlFetchApp.fetch(
+  const response = UrlFetchApp.fetch(
     "https://feedforce.slack.com/api/chat.postMessage",
     {
       method: "post",
       payload: {
         token: slackOauthAccessToken,
         channel: slackChannel,
-        text: slackText,
-        as_user: "true"
+        as_user: "true",
+        blocks: JSON.stringify([
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: "今日はインフラ朝会欠席します。ｶﾞｼｬｰﾝ ｶﾞｼｬｰﾝ :robot_face:",
+            }
+          },
+          {
+            type: "context",
+            elements: [
+              {
+                type: "mrkdwn",
+                text: ":github: <https://github.com/masutaka/my-google-apps-scripts/blob/master/infra-asakai-kesseki.gs|source code>",
+              }
+            ]
+          },
+        ]),
       }
     }
   );
+
+  console.log(`responseCode: ${response.getResponseCode()}, contentText: ${response.getContentText()}`);
 };
 
 const setTrigger = () => {
