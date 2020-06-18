@@ -1,3 +1,27 @@
+// PropertiesService: https://developers.google.com/apps-script/reference/properties/properties-service
+const SLACK_OAUTH_ACCESS_TOKEN = PropertiesService.getScriptProperties().getProperty("SLACK_OAUTH_ACCESS_TOKEN");
+
+const SLACK_CHANNEL = "#tech-infra";
+
+const SLACK_BLOCKS = [
+  {
+    type: "section",
+    text: {
+      type: "mrkdwn",
+      text: "今日はインフラ朝会欠席します。ｶﾞｼｬｰﾝ ｶﾞｼｬｰﾝ :robot_face:",
+    }
+  },
+  {
+    type: "context",
+    elements: [
+      {
+        type: "mrkdwn",
+        text: ":github: <https://github.com/masutaka/my-google-apps-scripts/blob/master/infra-asakai-kesseki.gs|source code>",
+      }
+    ]
+  },
+];
+
 const setTrigger = () => {
   const time = new Date();
   time.setHours(10);
@@ -26,10 +50,6 @@ const notifyIfNeed = () => {
 
   console.log(`[Absent] startTime: ${formatDate(startTime)}, endTime: ${formatDate(endTime)}`);
 
-  // PropertiesService: https://developers.google.com/apps-script/reference/properties/properties-service
-  const slackOauthAccessToken = PropertiesService.getScriptProperties().getProperty("SLACK_OAUTH_ACCESS_TOKEN");
-  const slackChannel = "#tech-infra";
-
   // UrlFetchApp: https://developers.google.com/apps-script/reference/url-fetch/url-fetch-app
   // Slack chat.postMessage: https://api.slack.com/methods/chat.postMessage
   const response = UrlFetchApp.fetch(
@@ -37,27 +57,10 @@ const notifyIfNeed = () => {
     {
       method: "post",
       payload: {
-        token: slackOauthAccessToken,
-        channel: slackChannel,
+        token: SLACK_OAUTH_ACCESS_TOKEN,
+        channel: SLACK_CHANNEL,
         as_user: "true",
-        blocks: JSON.stringify([
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: "今日はインフラ朝会欠席します。ｶﾞｼｬｰﾝ ｶﾞｼｬｰﾝ :robot_face:",
-            }
-          },
-          {
-            type: "context",
-            elements: [
-              {
-                type: "mrkdwn",
-                text: ":github: <https://github.com/masutaka/my-google-apps-scripts/blob/master/infra-asakai-kesseki.gs|source code>",
-              }
-            ]
-          },
-        ]),
+        blocks: JSON.stringify(SLACK_BLOCKS),
       }
     }
   );
