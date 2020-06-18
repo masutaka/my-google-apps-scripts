@@ -4,7 +4,10 @@
 
 ```
 $ npm i -g @google/clasp
+$ clasp login
 ```
+
+See also https://github.com/google/clasp
 
 ## 今日が全休だったらSlack statusとDNDを設定する
 
