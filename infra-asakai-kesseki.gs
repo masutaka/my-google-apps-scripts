@@ -1,3 +1,5 @@
+// See also https://feedforce.esa.io/posts/68760
+
 // PropertiesService: https://developers.google.com/apps-script/reference/properties/properties-service
 const SLACK_OAUTH_ACCESS_TOKEN = PropertiesService.getScriptProperties().getProperty("SLACK_OAUTH_ACCESS_TOKEN");
 

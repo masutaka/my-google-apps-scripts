@@ -1,3 +1,5 @@
+// See also https://feedforce.esa.io/posts/69110
+
 const SlackOauthAccessToken = PropertiesService.getScriptProperties().getProperty("SLACK_OAUTH_ACCESS_TOKEN");
 
 const main = () => {
