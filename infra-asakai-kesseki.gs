@@ -27,7 +27,7 @@ const setTrigger = () => {
   time.setHours(10);
   time.setMinutes(20);
 
-  console.log(`[info] set trigger at ${time}`);
+  console.log(`[Info] set trigger at ${time}`);
 
   // https://developers.google.com/apps-script/reference/script/script-app#newtriggerfunctionname
   ScriptApp.newTrigger("notifyIfNeed").timeBased().at(time).create();
