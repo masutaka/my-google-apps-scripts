@@ -94,6 +94,7 @@ const getInfraAsakai = (start, end) => {
 };
 
 const isPresent = (infraAsakai) => {
+  // インフラ共有会はゲストなので、ステータスが取れる。当該予定のオーナーだと出欠のステータスは取れない。
   // https://developers.google.com/apps-script/reference/calendar/guest-status
   return infraAsakai.getMyStatus() == CalendarApp.GuestStatus.YES;
 };
