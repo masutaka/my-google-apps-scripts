@@ -13,7 +13,7 @@ See also https://github.com/google/clasp
 
 [day-off/main.js](https://github.com/masutaka/my-google-apps-scripts/blob/master/day-off/main.js)
 
-Google Calendar で今日「全休」という予定が入っていたら、Slack で以下の設定をする。
+Google Calendar で今日「全休」という予定が入っていたら、Slack で以下を設定する。
 
 * Status を今日いっぱい「:yasumi: M/D（曜日）全休」にして、ああ全休なんだなと分かるようにする
     * 休みだから mention してくれるなという意味はないが、いつでも mention して下さいという意味もない
